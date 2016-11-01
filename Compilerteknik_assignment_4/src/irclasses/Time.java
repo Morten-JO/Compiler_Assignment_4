@@ -1,6 +1,7 @@
 package irclasses;
+import ir.IR;
 
-public class Time {
+public class Time  extends IR{
 	private int hour;
 	private int minute;
 	private int second;

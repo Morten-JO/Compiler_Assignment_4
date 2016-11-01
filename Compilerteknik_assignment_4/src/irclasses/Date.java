@@ -1,6 +1,8 @@
 package irclasses;
 
-public class Date {
+import ir.IR;
+
+public class Date extends IR {
 	private int day;
 	private int month;
 	private int year;

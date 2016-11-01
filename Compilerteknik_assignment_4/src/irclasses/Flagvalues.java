@@ -1,5 +1,7 @@
 package irclasses;
 
+import ir.IR;
+
 /**
  * Date: 25/10/2016
  *
@@ -14,7 +16,7 @@ package irclasses;
  * Email: morten2094@gmail.com
  */
 
-public class Flagvalues {
+public class Flagvalues extends IR {
 
 	private String value;
 	

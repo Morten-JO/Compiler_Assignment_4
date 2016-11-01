@@ -1,6 +1,7 @@
 package irclasses;
+import ir.IR;
 
-public class HexNumber {
+public class HexNumber extends IR {
 
 	private String hex = "0x";
 	

@@ -1,5 +1,4 @@
-package recognizer;
-// Generated from C:\Users\Tobias\network_part2.g4 by ANTLR 4.1
+package recognizer;// Generated from C:\Users\Tobias\network_part2.g4 by ANTLR 4.1
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
@@ -18,10 +17,7 @@ public class network_part2BaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitDate(@NotNull network_part2Parser.DateContext ctx) { 
-		
-		return visitChildren(ctx); 
-	}
+	@Override public T visitDate(@NotNull network_part2Parser.DateContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -94,6 +90,14 @@ public class network_part2BaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
 	@Override public T visitIpv4offset(@NotNull network_part2Parser.Ipv4offsetContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+	@Override public T visitIpv4adr(@NotNull network_part2Parser.Ipv4adrContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}

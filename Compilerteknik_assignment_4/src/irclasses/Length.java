@@ -1,8 +1,9 @@
 package irclasses;
 
+import ir.IR;
 
 
-public class Length {
+public class Length extends IR {
 
 	private String length = "length";
 	

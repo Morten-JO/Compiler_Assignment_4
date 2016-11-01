@@ -1,4 +1,5 @@
 package irclasses;
+import ir.IR;
 
 /**
  * Date: 25/10/2016
@@ -14,7 +15,7 @@ package irclasses;
  * Email: morten2094@gmail.com
  */
 
-public class Protinfo {
+public class Protinfo extends IR {
 	
 	private Protname name;
 	private Length length;

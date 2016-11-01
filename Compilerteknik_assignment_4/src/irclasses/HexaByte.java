@@ -1,7 +1,8 @@
 package irclasses;
 
+import ir.IR;
 
-public class HexaByte {
+public class HexaByte  extends IR {
 	
 	char[] bytes = new char[2];
 	

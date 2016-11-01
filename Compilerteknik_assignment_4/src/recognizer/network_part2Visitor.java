@@ -1,6 +1,4 @@
-package recognizer;
-
-// Generated from C:\Users\Tobias\network_part2.g4 by ANTLR 4.1
+package recognizer;// Generated from C:\Users\Tobias\network_part2.g4 by ANTLR 4.1
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -81,6 +79,13 @@ public interface network_part2Visitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitIpv4offset(@NotNull network_part2Parser.Ipv4offsetContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link network_part2Parser#ipv4adr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIpv4adr(@NotNull network_part2Parser.Ipv4adrContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link network_part2Parser#entry}.

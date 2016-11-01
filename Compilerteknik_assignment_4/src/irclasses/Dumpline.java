@@ -1,5 +1,8 @@
 package irclasses;
 
+import ir.IR;
+
+
 /**
  * Date: 25/10/2016
  *
@@ -14,7 +17,7 @@ package irclasses;
  * Email: morten2094@gmail.com
  */
 
-public class Dumpline {
+public class Dumpline  extends IR{
 	
 	private HexNumber number;
 	

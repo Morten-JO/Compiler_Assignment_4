@@ -1,6 +1,4 @@
-// Generated from C:\Users\Tobias\network_part2.g4 by ANTLR 4.1
-
-package recognizer;
+package recognizer;// Generated from C:\Users\Tobias\network_part2.g4 by ANTLR 4.1
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -118,6 +116,17 @@ public interface network_part2Listener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIpv4offset(@NotNull network_part2Parser.Ipv4offsetContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link network_part2Parser#ipv4adr}.
+	 * @param ctx the parse tree
+	 */
+	void enterIpv4adr(@NotNull network_part2Parser.Ipv4adrContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link network_part2Parser#ipv4adr}.
+	 * @param ctx the parse tree
+	 */
+	void exitIpv4adr(@NotNull network_part2Parser.Ipv4adrContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link network_part2Parser#entry}.

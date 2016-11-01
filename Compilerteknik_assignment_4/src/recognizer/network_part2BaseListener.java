@@ -1,4 +1,4 @@
-package recognizer;
+package recognizer;// Generated from C:\Users\Tobias\network_part2.g4 by ANTLR 4.1
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.misc.NotNull;
@@ -140,6 +140,19 @@ public class network_part2BaseListener implements network_part2Listener {
 	 * The default implementation does nothing.
 	 */
 	@Override public void exitIpv4offset(@NotNull network_part2Parser.Ipv4offsetContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void enterIpv4adr(@NotNull network_part2Parser.Ipv4adrContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitIpv4adr(@NotNull network_part2Parser.Ipv4adrContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

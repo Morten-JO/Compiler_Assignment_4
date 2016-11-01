@@ -1,4 +1,5 @@
 package irclasses;
+import ir.IR;
 
 /**
  * Date: 25/10/2016
@@ -14,7 +15,7 @@ package irclasses;
  * Email: morten2094@gmail.com
  */
 
-public class IpV4Id {
+public class IpV4Id extends IR{
 	
 	private String id = "id";
 	
