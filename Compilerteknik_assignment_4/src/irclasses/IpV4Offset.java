@@ -17,20 +17,19 @@ import ir.IR;
 
 public class IpV4Offset extends IR {
 	
-	private String offset = "offset";
-	
+	private int offset;
 	
 	public IpV4Offset(int number){
 		
-		this.offset += " " + number;
+		this.offset = number;
 		
 	}
 
-	public String getOffset() {
+	public Integer getOffset() {
 		return offset;
 	}
 
-	public void setOffset(String offset) {
+	public void setOffset(Integer offset) {
 		this.offset = offset;
 	}
 

@@ -2,7 +2,11 @@ package ir;
 
 import java.util.LinkedList;
 
+import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
+import org.antlr.v4.runtime.tree.ErrorNode;
+import org.antlr.v4.runtime.tree.ParseTreeListener;
+import org.antlr.v4.runtime.tree.TerminalNode;
 
 import irclasses.Date;
 import irclasses.Dumpline;
@@ -69,14 +73,30 @@ public class IRBuilder extends AbstractParseTreeVisitor<IR> implements network_p
 
 	@Override
 	public IpV4Flags visitIpv4flags(Ipv4flagsContext ctx) {
-		
+
 		return new IpV4Flags(visitFlagvalues(ctx.flagvalues()));
 	}
 
 	@Override
 	public Dumpline visitDumpline(DumplineContext ctx) {
-		
-		return new Dumpline(new HexNumber(ctx.HEXNUMBER().getText()));
+		System.out.println("START TOKEN TEXT: "+ctx.start.getText());
+		for(int i = 0; i < ctx.getTokens(1).size(); i++){
+			System.out.println("DEER BOY: #"+i+": "+ctx.getToken(1, i));
+		}
+		System.out.println("HEX CHILDS:"+ctx.HEXNUMBER().getChildCount());
+		System.out.println("CHILD COUNT : "+ctx.getChildCount());
+		System.out.println("DEPTH: "+ctx.depth());
+		System.out.println("RULE INDEX: "+ctx.getRuleIndex());
+		System.out.println("PARENT: "+ctx.getParent().getText());
+		System.out.println("ALT NUMBER: "+ctx.getAltNumber());
+		System.out.println("Depth of payload: "+ctx.getPayload().depth());
+		System.out.println("TEXT: "+ctx.getText());
+
+		for(int i = 0 ; i < ctx.getChildCount(); i++){
+			System.out.println("CHILD #"+i+" is: "+ctx.children.get(i).getText());
+		}
+		return null;
+		//return new Dumpline(new HexNumber(ctx.HEXNUMBER().getText()));
 	}
 
 	@Override
