@@ -5,19 +5,19 @@ import ir.IR;
 
 public class Length extends IR {
 
-	private String length = "length";
+	private int length;
 	
 	public Length(int length){
 		
-		this.length += " " + length;
+		this.length = length;
 		
 	}
 
-	public String getLength() {
+	public int getLength() {
 		return length;
 	}
 
-	public void setLength(String length) {
+	public void setLength(int length) {
 		this.length = length;
 	}
 }
