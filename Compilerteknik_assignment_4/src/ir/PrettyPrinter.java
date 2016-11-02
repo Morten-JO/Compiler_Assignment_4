@@ -50,8 +50,8 @@ public class PrettyPrinter implements IRElementVisitor<Integer>{
 	@Override
 	public Integer visitEntries(Entries e) {
 		for(Entry ent : e.getAllEntries()){
-			visitEntry(ent);
 			println("----------------------------------------------------");
+			visitEntry(ent);
 		}
 		return null;
 	}
@@ -114,7 +114,9 @@ public class PrettyPrinter implements IRElementVisitor<Integer>{
 		print("Receivers ");
 		visitIPV4ADR(e.getSecondAddress());
 		visitProtinfo(e.getProt());
-		visitDumpline(e.getDumpline());
+		for(int i = 0; i < e.getDumpline().size(); i++){
+			visitDumpline(e.getDumpline().get(i));
+		}
 		return null;
 	}
 
@@ -166,13 +168,17 @@ public class PrettyPrinter implements IRElementVisitor<Integer>{
 	@Override
 	public Integer visitDumpline(Dumpline e) {
 		print("Dump line: ");
-		//visitHexnumber(e.getNumber());
+		for(int i = 0; i < e.getStrings().size(); i++){
+			print(e.getStrings().get(i)+" ");
+		}
+		println("");
 		return null;
 	}
 
 	@Override
 	public Integer visitProtname(Protname e) {
-		println("Protocol: "+e.getProtocol());
+		print("Protocol: ");
+		println(e.getProtocol());
 		return null;
 	}
 
@@ -217,13 +223,8 @@ public class PrettyPrinter implements IRElementVisitor<Integer>{
 
 	@Override
 	public Integer visitIpV4Proto(IpV4Proto e) {
-		print("Protocol: ");
 		visitProtname(e.getName());
 		println("Protocol number: "+e.getNumber());
 		return null;
 	}
-
-	
-
-	
 }

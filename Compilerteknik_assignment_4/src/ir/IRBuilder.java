@@ -1,6 +1,8 @@
 package ir;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
@@ -79,24 +81,13 @@ public class IRBuilder extends AbstractParseTreeVisitor<IR> implements network_p
 
 	@Override
 	public Dumpline visitDumpline(DumplineContext ctx) {
-		System.out.println("START TOKEN TEXT: "+ctx.start.getText());
-		for(int i = 0; i < ctx.getTokens(1).size(); i++){
-			System.out.println("DEER BOY: #"+i+": "+ctx.getToken(1, i));
-		}
-		System.out.println("HEX CHILDS:"+ctx.HEXNUMBER().getChildCount());
-		System.out.println("CHILD COUNT : "+ctx.getChildCount());
-		System.out.println("DEPTH: "+ctx.depth());
-		System.out.println("RULE INDEX: "+ctx.getRuleIndex());
-		System.out.println("PARENT: "+ctx.getParent().getText());
-		System.out.println("ALT NUMBER: "+ctx.getAltNumber());
-		System.out.println("Depth of payload: "+ctx.getPayload().depth());
-		System.out.println("TEXT: "+ctx.getText());
-
+		
+		List<String> strings = new ArrayList<String>();
+		
 		for(int i = 0 ; i < ctx.getChildCount(); i++){
-			System.out.println("CHILD #"+i+" is: "+ctx.children.get(i).getText());
+			strings.add(ctx.children.get(i).getText());
 		}
-		return null;
-		//return new Dumpline(new HexNumber(ctx.HEXNUMBER().getText()));
+		return new Dumpline(strings);
 	}
 
 	@Override
@@ -192,13 +183,16 @@ public class IRBuilder extends AbstractParseTreeVisitor<IR> implements network_p
 
 	@Override
 	public IpV4Content visitIpv4content(Ipv4contentContext ctx) {
+		IpV4Fields fields = visitIpv4fields(ctx.ipv4fields());
+		IPV4ADR adrOne = visitIpv4adr(ctx.ipv4adr(0));
+		IPV4ADR adrTwo = visitIpv4adr(ctx.ipv4adr(1));
+		Protinfo protinfo = visitProtinfo(ctx.protinfo());
+		List<Dumpline> lines = new ArrayList<Dumpline>();
+		for(int i = 0; i < ctx.dumpline().size(); i++){
+			lines.add(visitDumpline(ctx.dumpline(i)));
+		}
 		
-				
-		
-		
-		return new IpV4Content(visitIpv4fields(ctx.ipv4fields()),
-				visitIpv4adr(ctx.ipv4adr(0)), visitIpv4adr(ctx.ipv4adr(1)),
-				visitProtinfo(ctx.protinfo()), visitDumpline(ctx.dumpline(0)));
+		return new IpV4Content(fields, adrOne, adrTwo, protinfo, lines);
 	}
 
 	@Override

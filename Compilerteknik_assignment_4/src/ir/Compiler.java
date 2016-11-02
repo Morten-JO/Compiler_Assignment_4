@@ -20,15 +20,11 @@ public class Compiler {
 		
 		Compiler comp = new Compiler(args);
 		
-		IR test = comp.generateIR();
-		if (test != null)
-			System.out.println("jensen 1");
+		IR build = comp.generateIR();
 		
-		comp.generateCode(test);
-		if (test != null)
-			System.out.println("jensen 2");
-		System.out.println(test.getEntries().getAllEntries().get(0).getDate().getMonth());
-		PrettyPrinter.print(test);
+		comp.generateCode(build);
+		
+		PrettyPrinter.print(build);
 		
 
 	}
