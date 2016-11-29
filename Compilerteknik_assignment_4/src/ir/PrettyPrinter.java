@@ -227,4 +227,10 @@ public class PrettyPrinter implements IRElementVisitor<Integer>{
 		println("Protocol number: "+e.getNumber());
 		return null;
 	}
+	
+	public static void printSentPackets(Entries e){
+		Analyzer analyze = new Analyzer(e);
+		analyze.packetCount(e);
+		
+	}
 }

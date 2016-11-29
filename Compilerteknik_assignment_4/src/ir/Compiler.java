@@ -24,7 +24,9 @@ public class Compiler {
 		
 		comp.generateCode(build);
 		
-		PrettyPrinter.print(build);
+		//PrettyPrinter.print(build);
+		
+		PrettyPrinter.printSentPackets(build.entries);
 		
 
 	}
