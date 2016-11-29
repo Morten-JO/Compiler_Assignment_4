@@ -17,24 +17,13 @@ import ir.IR;
 
 public class IpV4Proto extends IR {
 	
-	private String protocolDesc ="PROTO";
-	
 	private Protname name;
-	
 	private int number;
 	
 	public IpV4Proto(Protname name, int number){
+		this.name = name;
+		this.number = number;
 		
-		this.protocolDesc += " " + name.getProtocol() + " (" + number + ")";
-		
-	}
-
-	public String getProtocolDesc() {
-		return protocolDesc;
-	}
-
-	public void setProtocolDesc(String protocolDesc) {
-		this.protocolDesc = protocolDesc;
 	}
 
 	public Protname getName() {

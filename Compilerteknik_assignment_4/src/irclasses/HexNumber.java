@@ -3,10 +3,10 @@ import ir.IR;
 
 public class HexNumber extends IR {
 
-	private String hex = "0x";
+	private String hex;
 	
 	public HexNumber(String hex){
-		this.hex += hex;
+		this.hex = hex;
 	}
 
 	public String getHex() {
@@ -14,7 +14,6 @@ public class HexNumber extends IR {
 	}
 
 	public void setHex(String hex) {
-		this.hex = this.hex.substring(0, 2);
-		this.hex += hex;
+		this.hex = hex;
 	}
 }

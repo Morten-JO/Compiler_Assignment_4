@@ -17,19 +17,19 @@ import ir.IR;
 
 public class IpV4Id extends IR{
 	
-	private String id = "id";
+	private int id;
 	
 	public IpV4Id(int number){
 		
-		this.id += " " + number;
+		this.id = number;
 		
 	}
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

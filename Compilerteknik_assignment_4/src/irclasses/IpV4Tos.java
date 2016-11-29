@@ -17,20 +17,21 @@ import ir.IR;
 
 public class IpV4Tos extends IR {
 	
-	private String tos = "tos";
+	private HexNumber number;
 	
 	public IpV4Tos(HexNumber number){
-		
-		this.tos += " " + number.getHex();
-		
+		this.number = number;
 	}
 
-	public String getTos() {
-		return tos;
+	public HexNumber getNumber() {
+		return number;
 	}
 
-	public void setTos(String tos) {
-		this.tos = tos;
+	public void setNumber(HexNumber number) {
+		this.number = number;
 	}
+	
+	
+
 
 }

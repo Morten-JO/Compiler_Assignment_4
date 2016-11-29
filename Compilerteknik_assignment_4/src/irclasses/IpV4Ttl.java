@@ -17,19 +17,21 @@ import ir.IR;
 
 public class IpV4Ttl extends IR {
 	
-	private String ttl = "ttl";
+	private int ttl;
 	
 	public IpV4Ttl(int number){
 		
-		this.ttl += " " + number;
+		this.ttl = number;
 	}
 
-	public String getTtl() {
+	public int getTtl() {
 		return ttl;
 	}
 
-	public void setTtl(String ttl) {
+	public void setTtl(int ttl) {
 		this.ttl = ttl;
 	}
+	
+	
 
 }

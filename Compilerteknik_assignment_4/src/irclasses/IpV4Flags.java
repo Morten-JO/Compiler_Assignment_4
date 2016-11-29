@@ -19,11 +19,9 @@ public class IpV4Flags  extends IR{
 	
 	private Flagvalues values;
 	
-	private String flags = "flags";
 	
 	public IpV4Flags(Flagvalues values){
-		
-		this.flags += " [" + values.getValue() + "]";
+		this.values = values;
 		
 	}
 
@@ -33,14 +31,6 @@ public class IpV4Flags  extends IR{
 
 	public void setValues(Flagvalues values) {
 		this.values = values;
-	}
-
-	public String getFlags() {
-		return flags;
-	}
-
-	public void setFlags(String flags) {
-		this.flags = flags;
 	}
 
 }

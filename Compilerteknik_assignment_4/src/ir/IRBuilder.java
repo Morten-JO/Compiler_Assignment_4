@@ -1,8 +1,14 @@
 package ir;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
+import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
+import org.antlr.v4.runtime.tree.ErrorNode;
+import org.antlr.v4.runtime.tree.ParseTreeListener;
+import org.antlr.v4.runtime.tree.TerminalNode;
 
 import irclasses.Date;
 import irclasses.Dumpline;
@@ -69,14 +75,19 @@ public class IRBuilder extends AbstractParseTreeVisitor<IR> implements network_p
 
 	@Override
 	public IpV4Flags visitIpv4flags(Ipv4flagsContext ctx) {
-		
+
 		return new IpV4Flags(visitFlagvalues(ctx.flagvalues()));
 	}
 
 	@Override
 	public Dumpline visitDumpline(DumplineContext ctx) {
 		
-		return new Dumpline(new HexNumber(ctx.HEXNUMBER().getText()));
+		List<String> strings = new ArrayList<String>();
+		
+		for(int i = 0 ; i < ctx.getChildCount(); i++){
+			strings.add(ctx.children.get(i).getText());
+		}
+		return new Dumpline(strings);
 	}
 
 	@Override
@@ -172,13 +183,16 @@ public class IRBuilder extends AbstractParseTreeVisitor<IR> implements network_p
 
 	@Override
 	public IpV4Content visitIpv4content(Ipv4contentContext ctx) {
+		IpV4Fields fields = visitIpv4fields(ctx.ipv4fields());
+		IPV4ADR adrOne = visitIpv4adr(ctx.ipv4adr(0));
+		IPV4ADR adrTwo = visitIpv4adr(ctx.ipv4adr(1));
+		Protinfo protinfo = visitProtinfo(ctx.protinfo());
+		List<Dumpline> lines = new ArrayList<Dumpline>();
+		for(int i = 0; i < ctx.dumpline().size(); i++){
+			lines.add(visitDumpline(ctx.dumpline(i)));
+		}
 		
-				
-		
-		
-		return new IpV4Content(visitIpv4fields(ctx.ipv4fields()),
-				visitIpv4adr(ctx.ipv4adr(0)), visitIpv4adr(ctx.ipv4adr(1)),
-				visitProtinfo(ctx.protinfo()), visitDumpline(ctx.dumpline(0)));
+		return new IpV4Content(fields, adrOne, adrTwo, protinfo, lines);
 	}
 
 	@Override

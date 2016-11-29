@@ -1,6 +1,9 @@
 package irclasses;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ir.IR;
 
 
@@ -11,15 +14,14 @@ public class IpV4Content extends IR {
 	private IPV4ADR address;
 	private IPV4ADR secondAddress;
 	private Protinfo prot;
-	private Dumpline dumpline;
+	private List<Dumpline> dumplines;
 	
-	public IpV4Content(IpV4Fields field, IPV4ADR first, IPV4ADR second, Protinfo info, Dumpline line){
+	public IpV4Content(IpV4Fields field, IPV4ADR first, IPV4ADR second, Protinfo info, List<Dumpline> lines){
 		fields = field; 
 		this.address = first;
 		this.secondAddress = second;
 		this.prot = info;
-		this.dumpline = line;
-				
+		dumplines = lines;
 	}
 
 	public IpV4Fields getFields() {
@@ -54,12 +56,12 @@ public class IpV4Content extends IR {
 		this.prot = prot;
 	}
 
-	public Dumpline getDumpline() {
-		return dumpline;
+	public List<Dumpline> getDumpline() {
+		return dumplines;
 	}
 
-	public void setDumpline(Dumpline dumpline) {
-		this.dumpline = dumpline;
+	public void setDumpline(List<Dumpline> dumpline) {
+		this.dumplines = dumpline;
 	}
 
 

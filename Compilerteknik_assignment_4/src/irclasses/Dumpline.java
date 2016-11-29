@@ -1,39 +1,22 @@
 package irclasses;
 
+import java.util.List;
+
 import ir.IR;
-
-
-/**
- * Date: 25/10/2016
- *
- * Project: Compilerteknik_assignment_2
- *
- * File: Dumpline.java
- *
- * Created by: Morten Jørvad
- *
- * Github: https://github.com/Mortenbaws
- *
- * Email: morten2094@gmail.com
- */
 
 public class Dumpline  extends IR{
 	
-	private HexNumber number;
-	
-	
+	private List<String> strings;
 
-	public Dumpline(HexNumber number){
-		
-		this.number = number;
-	}
-	
-	public HexNumber getNumber() {
-		return number;
+	public Dumpline(List<String> strs){
+		strings = strs;
 	}
 
-	public void setNumber(HexNumber number) {
-		this.number = number;
+	public List<String> getStrings() {
+		return strings;
 	}
 
+	public void setStrings(List<String> strings) {
+		this.strings = strings;
+	}	
 }
