@@ -14,15 +14,17 @@ public class AttackPreventer {
 			boolean firstExists = false;
 			boolean secondExists = false;
 			Packet packet = entries.getAllEntries().get(i).getPacket();
-			for(int x = 0; x < users.size(); x++){
-				if(users.get(x).getMac().getMacAddress().equals(packet.getAddress1().getMacAddress())){
-					if(users.get(x).getIPV4ADR().compare(packet.getContent().getAddress())){
+			for(int j = 0; j < users.size(); j++){
+				//check if senders ip/mac exists in list
+				if(users.get(j).getMac().getMacAddress().equals(packet.getAddress1().getMacAddress())){
+					if(users.get(j).getIPV4ADR().compare(packet.getContent().getAddress())){
 						firstExists = true;
 						break;
 					}
 				}
-				if(users.get(x).getMac().getMacAddress().equals(packet.getAddress2().getMacAddress())){
-					if(users.get(x).getIPV4ADR().compare(packet.getContent().getSecondAddress())){
+				//check if receivers ip/mac exists in list
+				if(users.get(j).getMac().getMacAddress().equals(packet.getAddress2().getMacAddress())){
+					if(users.get(j).getIPV4ADR().compare(packet.getContent().getSecondAddress())){
 						secondExists = true;
 						break;
 					}
@@ -34,24 +36,27 @@ public class AttackPreventer {
 			if(!secondExists){
 				users.add(new User(packet.getAddress2(), packet.getContent().getSecondAddress()));
 			}
-			for(int x = 0; x < users.size(); x++){
-				if(users.get(i).getIPV4ADR().compare(packet.getContent().getAddress())){
-					if(!users.get(i).getMac().getMacAddress().equals(packet.getAddress1().getMacAddress())){
+		}
+		for(int i = 0; i < entries.getAllEntries().size(); i++){
+			Packet packet = entries.getAllEntries().get(i).getPacket();
+			for(int j = 0; j < users.size(); j++){
+				if(users.get(j).getIPV4ADR().compare(packet.getContent().getAddress())){
+					if(!users.get(j).getMac().getMacAddress().equals(packet.getAddress1().getMacAddress())){
 						throw new AttackException("Misuse in entry!");
 					}
 				}
-				if(users.get(i).getIPV4ADR().compare(packet.getContent().getSecondAddress())){
-					if(!users.get(i).getMac().getMacAddress().equals(packet.getAddress2().getMacAddress())){
+				if(users.get(j).getIPV4ADR().compare(packet.getContent().getSecondAddress())){
+					if(!users.get(j).getMac().getMacAddress().equals(packet.getAddress2().getMacAddress())){
 						throw new AttackException("Misuse in entry!");
 					}
 				}
-				if(users.get(i).getMac().getMacAddress().equals(packet.getAddress1().getMacAddress())){
-					if(!users.get(i).getIPV4ADR().compare(packet.getContent().getAddress())){
+				if(users.get(j).getMac().getMacAddress().equals(packet.getAddress1().getMacAddress())){
+					if(!users.get(j).getIPV4ADR().compare(packet.getContent().getAddress())){
 						throw new AttackException("Misuse in entry!");
 					}
 				}
-				if(users.get(i).getMac().getMacAddress().equals(packet.getAddress2().getMacAddress())){
-					if(!users.get(i).getIPV4ADR().compare(packet.getContent().getSecondAddress())){
+				if(users.get(j).getMac().getMacAddress().equals(packet.getAddress2().getMacAddress())){
+					if(!users.get(j).getIPV4ADR().compare(packet.getContent().getSecondAddress())){
 						throw new AttackException("Misuse in entry!");
 					}
 				}
@@ -59,4 +64,67 @@ public class AttackPreventer {
 		}
 	}
 	
+	public void findAttacks(Entries entries) {
+		List<ChangedUser> changedUsers = new ArrayList<ChangedUser>();
+		List<User> users = new ArrayList<User>();
+		for(int i = 0; i < entries.getAllEntries().size(); i++){
+			boolean firstExists = false;
+			boolean secondExists = false;
+			Packet packet = entries.getAllEntries().get(i).getPacket();
+			for(int j = 0; j < users.size(); j++){
+				//check if senders ip/mac exists in list
+				if(users.get(j).getMac().getMacAddress().equals(packet.getAddress1().getMacAddress())){
+					if(users.get(j).getIPV4ADR().compare(packet.getContent().getAddress())){
+						firstExists = true;
+						break;
+					}
+				}
+				//check if receivers ip/mac exists in list
+				if(users.get(j).getMac().getMacAddress().equals(packet.getAddress2().getMacAddress())){
+					if(users.get(j).getIPV4ADR().compare(packet.getContent().getSecondAddress())){
+						secondExists = true;
+						break;
+					}
+				}
+			}
+			if(!firstExists){
+				users.add(new User(packet.getAddress1(), packet.getContent().getAddress()));
+			}
+			if(!secondExists){
+				users.add(new User(packet.getAddress2(), packet.getContent().getSecondAddress()));
+			}
+		}
+		for(int i = 0; i < entries.getAllEntries().size(); i++){
+			Packet packet = entries.getAllEntries().get(i).getPacket();
+			for(int j = 0; j < users.size(); j++){
+				if(users.get(j).getIPV4ADR().compare(packet.getContent().getAddress())){
+					if(!users.get(j).getMac().getMacAddress().equals(packet.getAddress1().getMacAddress())){
+						changedUsers.add(new ChangedUser(users.get(j).getMac(), packet.getContent().getAddress(), packet.getAddress1(), null));
+					}
+				}
+				if(users.get(j).getIPV4ADR().compare(packet.getContent().getSecondAddress())){
+					if(!users.get(j).getMac().getMacAddress().equals(packet.getAddress2().getMacAddress())){
+						changedUsers.add(new ChangedUser(users.get(j).getMac(), packet.getContent().getSecondAddress(), packet.getAddress2(), null));
+					}
+				}
+				if(users.get(j).getMac().getMacAddress().equals(packet.getAddress1().getMacAddress())){
+					if(!users.get(j).getIPV4ADR().compare(packet.getContent().getAddress())){
+						changedUsers.add(new ChangedUser(users.get(j).getMac(), users.get(j).getIPV4ADR(), null, packet.getContent().getAddress()));
+					}
+				}
+				if(users.get(j).getMac().getMacAddress().equals(packet.getAddress2().getMacAddress())){
+					if(!users.get(j).getIPV4ADR().compare(packet.getContent().getSecondAddress())){
+						changedUsers.add(new ChangedUser(users.get(j).getMac(), users.get(j).getIPV4ADR(), null, packet.getContent().getSecondAddress()));
+					}
+				}
+			}
+		}
+		for(int i = 0; i < changedUsers.size(); i++){
+			if(changedUsers.get(i).getChangedIP() == null){
+				System.out.println(changedUsers.get(i).getIPV4ADR().getAsString()+" changed from "+changedUsers.get(i).getMac().getMacAddress() + " to "+changedUsers.get(i).getChangedMac().getMacAddress());
+			} else if(changedUsers.get(i).getChangedMac() == null){
+				System.out.println(changedUsers.get(i).getMac().getMacAddress()+" changed from "+changedUsers.get(i).getIPV4ADR()+" to "+changedUsers.get(i).getChangedIP());
+			}
+		}
+	}
 }

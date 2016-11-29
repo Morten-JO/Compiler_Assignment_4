@@ -108,5 +108,9 @@ public class IPV4ADR extends IR {
 		}
 		return false;
 	}
+	
+	public String getAsString(){
+		return one+"."+two+"."+three+"."+four+":"+five;
+	}
 
 }

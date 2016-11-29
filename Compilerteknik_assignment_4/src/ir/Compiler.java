@@ -35,6 +35,7 @@ public class Compiler {
 		} catch(AttackException e){
 			e.printStackTrace();
 		}
+		preventer.findAttacks(build.getEntries());
 
 	}
 	
