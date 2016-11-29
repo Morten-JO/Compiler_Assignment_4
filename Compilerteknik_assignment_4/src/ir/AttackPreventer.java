@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import irclasses.Entries;
+import irclasses.IPV4ADR;
+import irclasses.Mac;
 import irclasses.Packet;
 
 public class AttackPreventer {
@@ -119,11 +121,31 @@ public class AttackPreventer {
 				}
 			}
 		}
+		
+		//remove duplicates
+		for(int i = 0; i < changedUsers.size(); i++){
+			for(int j = 0; j < changedUsers.size(); j++){
+				if(j != i){
+					if(changedUsers.get(i).getChangedIP() == null){
+						Mac macOfI = changedUsers.get(i).getChangedMac();
+						if(macOfI.getMacAddress().equals(changedUsers.get(j).getChangedMac()) || macOfI.getMacAddress().equals(changedUsers.get(j).getMac())){
+							changedUsers.remove(j);
+						}
+					} else if(changedUsers.get(i).getChangedMac() == null){
+						IPV4ADR adr = changedUsers.get(i).getChangedIP();
+						if(adr.compare(changedUsers.get(j).getChangedIP()) || adr.compare(changedUsers.get(j).getIPV4ADR())){
+							changedUsers.remove(j);
+						}
+					}
+				}
+			}
+		}
+		
 		for(int i = 0; i < changedUsers.size(); i++){
 			if(changedUsers.get(i).getChangedIP() == null){
 				System.out.println(changedUsers.get(i).getIPV4ADR().getAsString()+" changed from "+changedUsers.get(i).getMac().getMacAddress() + " to "+changedUsers.get(i).getChangedMac().getMacAddress());
 			} else if(changedUsers.get(i).getChangedMac() == null){
-				System.out.println(changedUsers.get(i).getMac().getMacAddress()+" changed from "+changedUsers.get(i).getIPV4ADR()+" to "+changedUsers.get(i).getChangedIP());
+				System.out.println(changedUsers.get(i).getMac().getMacAddress()+" changed from "+changedUsers.get(i).getIPV4ADR().getAsString()+" to "+changedUsers.get(i).getChangedIP().getAsString());
 			}
 		}
 	}
