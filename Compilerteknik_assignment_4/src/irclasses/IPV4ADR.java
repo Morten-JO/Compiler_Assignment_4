@@ -93,5 +93,20 @@ public class IPV4ADR extends IR {
 	public void setFive(int five) {
 		this.five = five;
 	}
+	
+	public boolean compare(IPV4ADR adr){
+		if(this.one == adr.one){
+			if(this.two == adr.two){
+				if(this.three == adr.three){
+					if(this.four == adr.four){
+						if(this.five == adr.five){
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
 
 }

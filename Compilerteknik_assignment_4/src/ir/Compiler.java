@@ -28,6 +28,13 @@ public class Compiler {
 		
 		PrettyPrinter.printSentPackets(build.entries);
 		
+		AttackPreventer preventer = new AttackPreventer();
+		try{
+			preventer.findAttack(build.getEntries());
+			System.out.println("NO MISUSE FOUND!");
+		} catch(AttackException e){
+			e.printStackTrace();
+		}
 
 	}
 	
