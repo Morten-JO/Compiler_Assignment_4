@@ -28,7 +28,7 @@ public class Compiler {
 		
 		PrettyPrinter.printSentPackets(build.entries);
 		
-		AttackPreventer preventer = new AttackPreventer();
+		IntrusionDetection preventer = new IntrusionDetection();
 		try{
 			preventer.findAttack(build.getEntries());
 			System.out.println("NO MISUSE FOUND!");

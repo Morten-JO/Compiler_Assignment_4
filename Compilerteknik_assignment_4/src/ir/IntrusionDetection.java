@@ -8,7 +8,7 @@ import irclasses.IPV4ADR;
 import irclasses.Mac;
 import irclasses.Packet;
 
-public class AttackPreventer {
+public class IntrusionDetection {
 
 	public void findAttack(Entries entries) throws AttackException {
 		List<User> users = new ArrayList<User>();
@@ -78,14 +78,12 @@ public class AttackPreventer {
 				if(users.get(j).getMac().getMacAddress().equals(packet.getAddress1().getMacAddress())){
 					if(users.get(j).getIPV4ADR().compare(packet.getContent().getAddress())){
 						firstExists = true;
-						break;
 					}
 				}
 				//check if receivers ip/mac exists in list
 				if(users.get(j).getMac().getMacAddress().equals(packet.getAddress2().getMacAddress())){
 					if(users.get(j).getIPV4ADR().compare(packet.getContent().getSecondAddress())){
 						secondExists = true;
-						break;
 					}
 				}
 			}
@@ -96,6 +94,11 @@ public class AttackPreventer {
 				users.add(new User(packet.getAddress2(), packet.getContent().getSecondAddress()));
 			}
 		}
+		
+		for(int i = 0; i < users.size(); i++){
+			System.out.println("#"+i+": "+users.get(i).getMac().getMacAddress()+"---"+users.get(i).getIPV4ADR().getAsString());
+		}
+		
 		for(int i = 0; i < entries.getAllEntries().size(); i++){
 			Packet packet = entries.getAllEntries().get(i).getPacket();
 			for(int j = 0; j < users.size(); j++){
@@ -127,12 +130,14 @@ public class AttackPreventer {
 			for(int j = 0; j < changedUsers.size(); j++){
 				if(j != i){
 					if(changedUsers.get(i).getChangedIP() == null){
-						if(changedUsers.get(i).getMac().getMacAddress().equals(changedUsers.get(j).getChangedMac().getMacAddress())){
+						if(changedUsers.get(i).getMac().getMacAddress().equals(changedUsers.get(j).getChangedMac().getMacAddress()) || changedUsers.get(i).getMac().getMacAddress().equals(changedUsers.get(j).getMac().getMacAddress())){
 							changedUsers.remove(j);
+							j--;
 						}
 					} else if(changedUsers.get(i).getChangedMac() == null){
-						if(changedUsers.get(i).getIPV4ADR().compare(changedUsers.get(j).getChangedIP())){
+						if(changedUsers.get(i).getIPV4ADR().compare(changedUsers.get(j).getChangedIP()) || changedUsers.get(i).getIPV4ADR().compare(changedUsers.get(j).getIPV4ADR())){
 							changedUsers.remove(j);
+							j--;
 						}
 					}
 				}
