@@ -127,13 +127,11 @@ public class AttackPreventer {
 			for(int j = 0; j < changedUsers.size(); j++){
 				if(j != i){
 					if(changedUsers.get(i).getChangedIP() == null){
-						Mac macOfI = changedUsers.get(i).getChangedMac();
-						if(macOfI.getMacAddress().equals(changedUsers.get(j).getChangedMac()) || macOfI.getMacAddress().equals(changedUsers.get(j).getMac())){
+						if(changedUsers.get(i).getMac().getMacAddress().equals(changedUsers.get(j).getChangedMac().getMacAddress())){
 							changedUsers.remove(j);
 						}
 					} else if(changedUsers.get(i).getChangedMac() == null){
-						IPV4ADR adr = changedUsers.get(i).getChangedIP();
-						if(adr.compare(changedUsers.get(j).getChangedIP()) || adr.compare(changedUsers.get(j).getIPV4ADR())){
+						if(changedUsers.get(i).getIPV4ADR().compare(changedUsers.get(j).getChangedIP())){
 							changedUsers.remove(j);
 						}
 					}
